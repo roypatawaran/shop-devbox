@@ -1,0 +1,17 @@
+{
+  "routes": [
+    "/pages",
+    "/pages/addon",
+    "/pages/addon/selection",
+    "/pages/domain",
+    "/pages/domain/selection",
+    "/pages/info",
+    "/pages/info/appointment",
+    "/pages/info/business",
+    "/pages/info/quotation",
+    "/pages/info/success",
+    "/pages/template",
+    "/pages/template/selection",
+    "/pages/templates"
+  ]
+}
