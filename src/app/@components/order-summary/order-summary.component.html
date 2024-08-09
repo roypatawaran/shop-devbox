@@ -1,0 +1,42 @@
+<div class="flex flex-wrap content-between h-full bg-slate-100 [ px-8 py-5 ]">
+    <div class="w-full [ pb-20 ]">
+        <ul class="steps steps-vertical">
+            <li class="step step-neutral">Template</li>
+            <li class="step step-neutral">Find your Domain Name</li>
+            <li class="step " [ngClass]="{'step-neutral': step >='3'}">Select Add Ons</li>
+            <li class="step" [ngClass]="{'step-neutral': step >='4'}">Business Information</li>
+            <li class="step" [ngClass]="{'step-neutral': step >='5'}">Get a Quotation</li>
+            <li class="step" [ngClass]="{'step-neutral': step >='6'}">Send an Appointment</li>
+          </ul>
+    </div>
+    <!-- <div class="w-full">
+        <div class="flex flex-wrap [ px-2 pt-3 pb-3 ]">
+            <p class="w-1/2 text-left">Template</p>
+            <p class="w-1/2 text-right">{{ 3 | currency: 'AUD' : 'code'  }}</p>
+            <p class="w-1/2 text-left">Domain Name</p>
+            <p class="w-1/2 text-right">{{ 10 | currency: 'AUD' : 'code'  }}</p>
+        </div>
+
+    </div> -->
+    <div class="w-full">
+        <div class="flex flex-wrap [ px-2 pt-3 pb-3 ]">
+            <p class="w-1/2 text-left">Template</p>
+            <p class="w-1/2 text-right">{{ 3 | currency: 'AUD' : 'code'  }}</p>
+            <p class="w-1/2 text-left" *ngIf="step >= 3" >Domain Name</p>
+            <p class="w-1/2 text-right" *ngIf="step >= 3" >{{ 10 | currency: 'AUD' : 'code'  }}</p>
+            <p class="w-1/2 text-left" *ngIf="step >= 4">Add-Ons</p>
+            <p class="w-1/2 text-right" *ngIf="step >= 4">{{ 12 | currency: 'AUD' : 'code'  }}</p>
+        </div>
+        <div class="flex flex-wrap border-t-4 [ px-2 pt-3 pb-6 ]">
+            <p class="w-1/2 text-left font-semibold">Estimated Total</p>
+            <p class="w-1/2 text-right font-semibold" *ngIf="step == 2">{{ 3 | currency: 'AUD' : 'code'  }}</p>
+            <p class="w-1/2 text-right font-semibold" *ngIf="step == 3">{{ 13 | currency: 'AUD' : 'code'  }}</p>
+            <p class="w-1/2 text-right font-semibold" *ngIf="step == 4">{{ 25 | currency: 'AUD' : 'code'  }}</p>
+        </div>
+        
+        <button *ngIf="step <= 3" class="w-full bg-slate-950 text-white [ p-2 ]">Checkout</button>
+        <button *ngIf="step == 4" routerLink="/pages/info/quotation" [queryParams]="{step: '5'}" class="w-full bg-slate-950 text-white [ p-2 ]">Get Your Quotation</button>
+        <button *ngIf="step == 5" routerLink="/pages/info/appointment" [queryParams]="{step: '6'}" class="w-full bg-slate-950 text-white [ p-2 ]">Schedule Your Appointment</button>
+        <p class="font-light text-xs [ py-1 ]">By checking out, you agree to our <span class="text-blue-700 underline">Terms & Conditions</span> and <span class="text-blue-700 underline">Privacy Policy</span></p>
+    </div>
+</div>
