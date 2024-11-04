@@ -1,29 +1,48 @@
-<div
-  class="hero h-1/2"
-  style="background-image: url(https://images.unsplash.com/photo-1512798705819-f4be9c1ed36e?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);">
-  <div class="hero-overlay bg-opacity-70"></div>
-  <div class="hero-content text-neutral-content text-center">
-    <div class="max-w-md">
-      <h1 class="mb-5 text-5xl font-bold">Hello there</h1>
-      <p class="mb-5">
-        Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
-        quasi. In deleniti eaque aut repudiandae et a id nisi.
-      </p>
-      <button class="btn btn-primary">Get Started</button>
+<video playsinline autoplay muted loop poster>
+    <source src="../../assets/soft-gradient-abstract-animated-background-2024-01-28-02-34-38-utc.webm" type="video/webm">
+</video>
+<div class="hero h-[53rem]">
+    <div class="hero-overlay bg-hero">
+        <div class="flex flex-wrap h-full items-center">
+            <div class="min-w-full [ pl-6 sm:pl-6 md:pl-8 lg:pl-20 xl:pl-40 ]">
+                <h1 class="mb-3 text-5xl sm:text-5xl md:text-5xl lg:text-5xl xl:text-5xl text-black font-bold tracking-tight max-w-screen-sm">Your new website is waiting.</h1>
+                <p class="text-lg sm:text-xl md:text-2xl lg:text-2xl xl:text-2xl text-black pb-10 font-light tracking-tight max-w-screen-sm [ pr-4 ]">
+                    Get started on a custom website with a few clicks and leave the rest to us.
+                </p>
+                <button (click)="scroll(template)" class="btn rounded-full text-base sm:text-base md:text-lg lg:text-lg xl:text-lg px-12">See Templates</button>
+            </div>
+        </div>
     </div>
-  </div>
+  <!-- <div class="hero-content text-neutral-content"> -->
+    <!-- <div class="flex justify-start text-neutral-content -ml-96"> 
+        <div class="min-w-full">
+            <h1 class="mb-5 text-5xl text-white font-light">Your all-new website is waiting.</h1>
+            <p class="text-xl text-white mb-5">
+                Get strated on a custom website with a few <br> and leave the rest to us.
+            </p>
+            <button class="btn rounded-full text-lg px-12">See Templates</button>
+        </div>
+    </div> -->
 </div>
-<div class="flex justify-center [ pt-8 ]">
+<!-- <div class="justify-center block [ px-12 pt-8 ]">
     <ul class="steps">
         <li class="step step-neutral [ px-20 ]">Choose a Template</li>
         <li class="step">Find your Domain Name</li>
         <li class="step">Select Add Ons</li>
         <li class="step">Business Information</li>
-        <li class="step">Get a Quotation</li>
-        <li class="step">Send an Appointment</li>
+        <li class="step">Schedule Appointment</li>
+      </ul>
+</div> -->
+<div class="block [ sm:px-12 pt-12 ]">
+    <ul class="steps w-full">
+        <li class="step step-neutral text-xs sm:text-sm">Choose your Template</li>
+        <li class="step text-xs sm:text-sm">Find your Domain Name</li>
+        <li class="step text-xs sm:text-sm">Select Add Ons</li>
+        <li class="step text-xs sm:text-sm">Business Information</li>
+        <li class="step text-xs sm:text-sm">Schedule Appointment</li>
       </ul>
 </div>
-<div class="px-40 py-6">
+<div class="px-6 sm:px-6 md:px-8 lg:px-20 xl:px-40 py-6" #template>
     <p class="text-2xl font-semibold [ py-4 ]">Choose a Template</p>
     <!-- <div
         class="group relative cursor-pointer overflow-hidden bg-white px-6 pt-10 pb-8 shadow-xl ring-1 ring-gray-900/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl sm:mx-auto sm:max-w-sm sm:rounded-lg sm:px-10">
@@ -49,27 +68,30 @@
     </div> -->
     <div class="flex flex-wrap">
         @for (element of templates; track $index) {
-        <div class="w-1/2 [ p-4 ]">
-            <div class="relative w-full h-[20rem] mx-auto px-5 py-8 group rounded-md bg-gray-200 overflow-hidden shadow-xl">
-                <img src={{element.img_url}} alt="" class="absolute w-full h-full inset-0 object-cover">
+        <div class="w-full sm:w-full md:w-1/2 lg:w-1/3 xl:w-1/3 [ p-4 ]">
+            <div class="relative w-full h-[36rem] mx-auto px-5 py-8 group rounded-md bg-gray-200 overflow-hidden shadow-xl">
+                <!-- <img src='{{element.asset_url}}' alt="" class="absolute w-full h-full inset-0 object-cover object-top"> -->
+                 <img src='{{element.asset_url}}' alt="" class="absolute w-full h-full inset-0 object-cover object-top">
                 <div
                     class="absolute inset-0 w-full h-full rounded-md bg-black bg-opacity-0 transition duration-500 backdrop-filter group-hover:bg-opacity-70 group-hover:backdrop-blur">
                 </div>
                 <div class="absolute inset-x-5 text-white">
                     <!-- <h2 class="text-4xl font-semibold mb-2">Template 1</h2>
                     <p class="text-sm font-medium uppercase tracking-wider mb-6">Free</p> -->
-                    <p class="hidden group-hover:block">{{ element.details }}</p>
+                    <p class="hidden group-hover:block">{{ element.blurb }}</p>
                 </div>
-                <button class="absolute inset-x-5 bottom-8 py-3 rounded-full font-semibold bg-white shadow-lg hidden transition duration-200 hover:bg-gray-300 group-hover:block" routerLink="/pages/template/view/1">View Template</button>
+                <div class="w-full">
+                    <button class="w-14 h-14 absolute justify-center bottom-6 right-6 rounded-full bg-white shadow-lg hidden transition duration-200 hover:bg-gray-300 group-hover:block" [routerLink]="['/pages/template/view/', element._id]" >
+                        <img class="h-4 mx-auto" src="../../../assets/right-thin-chevron-svgrepo-com.svg" alt="">
+                    </button>
+                </div>
+                
             </div>
             <div class="flex flex-wrap justify-between items-center [ px-1 py-4 ]">
-                <p class="text-md font-semibold text-slate-900">{{element.template_name}}</p>
-                <button class="text-white bg-slate-900 rounded-full text-sm font-normal [ py-2 px-4 ]" routerLink="/pages/domain/selection" [queryParams]="{step: '2'}">Add to Cart</button>
+                <p class="text-lg font-semibold text-slate-900">{{element.template_name}}</p>
+                <button class="text-white bg-slate-900 rounded-full text-sm font-normal [ py-2 px-4 ]" [routerLink]="['/pages/template/view/', element._id]" >View Template</button>
             </div>
         </div>
     }
-        
     </div>
-    
-    
 </div>

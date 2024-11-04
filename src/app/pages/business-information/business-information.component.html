@@ -1,86 +1,86 @@
 <div class="flex flex-wrap min-h-screen">
-    <div class="w-8/12 pl-36 pr-16 py-10">
+    <div class="block sm:block md:block lg:hidden xl:hidden -z-50 [ sm:px-12 pt-12 ]">
+        <ul class="steps w-full">
+            <li class="step step-neutral text-xs sm:text-sm">Choose your Template</li>
+            <li class="step step-neutral text-xs sm:text-sm">Find your Domain Name</li>
+            <li class="step step-neutral text-xs sm:text-sm">Select Add Ons</li>
+            <li class="step step-neutral text-xs sm:text-sm">Business Information</li>
+            <li class="step text-xs sm:text-sm">Schedule Appointment</li>
+          </ul>
+    </div>
+    <div class="w-full sm:w-full md:w-full lg:w-8/12 xl:w-8/12 px-4 sm:pl-36 sm:pr-16 py-10">
         <p class="text-2xl font-bold">We'd like to get to know you!</p>
-        <div class="flex flex-wrap justify-between gap-y-12 [ py-8 ]">
+        <div class="flex flex-wrap justify-between gap-y-4 [ py-8 ]">
             <div class="flex flex-wrap items-center w-full">
-                <p class="w-1/4 font-semibold">Company Name</p>
-                <input type="text" class="border w-1/2 rounded-md [ p-2 ]" placeholder="Daisy" />
+                <p class="w-full sm:w-1/4 font-semibold text-sm sm:text-base">Name*</p>
+                <input (change)="next()" [(ngModel)]="name" type="text" class="border grow sm:w-1/2 text-sm sm:text-base rounded-md [ p-2 ]" placeholder="" [ngClass]="{'input-error': name === '' && form_touched == true}"/>
             </div>
-            <div class="flex flex-wrap items-start w-full">
+            <!-- <div class="flex flex-wrap items-start w-full">
                 <p class="w-1/4 font-semibold">Business Address</p>
-                <textarea type="text" rows="4" class="border grow rounded-md [ p-2 ]" placeholder="Daisy"></textarea>
+                <textarea type="text" rows="4" class="border grow rounded-md [ p-2 ]" placeholder=""></textarea>
+            </div> -->
+            <div class="flex flex-wrap items-center w-full">
+                <p class="w-full sm:w-1/4 font-semibold text-sm sm:text-base">Email*</p>
+                <input (change)="next()" [(ngModel)]="email" type="text" class="border grow sm:w-1/2 text-sm sm:text-base rounded-md [ p-2 ]" placeholder="" [ngClass]="{'input-error': email === '' && form_touched == true}"/>
             </div>
             <div class="flex flex-wrap items-center w-full">
-                <p class="w-1/4 font-semibold">Industry</p>
-                <input type="text" class="border w-1/2 rounded-md [ p-2 ]" placeholder="Daisy" />
-            </div>
-            <div class="flex flex-wrap items-start w-full">
-                <p class="w-1/4 font-semibold">Brief Background on your business</p>
-                <textarea type="text" rows="4" class="border grow rounded-md [ p-2 ]" placeholder="Daisy"></textarea>
-            </div>
-            <!-- <div class="flex flex-wrap items-center w-full">
-                <p class="w-1/4 font-semibold">Mobile Number</p>
-                <input type="text" class="border w-1/2 rounded-md [ p-2 ]" placeholder="Daisy" />
+                <p class="w-full sm:w-1/4 font-semibold text-sm sm:text-base">Mobile Number*</p>
+                <input (change)="next()" [(ngModel)]="mobile" type="text" class="border grow sm:w-1/2 text-sm sm:text-base rounded-md [ p-2 ]" placeholder="" [ngClass]="{'input-error': mobile === '' && form_touched == true}"/>
             </div>
             <div class="flex flex-wrap items-center w-full">
-                <p class="w-1/4 font-semibold">Email</p>
-                <input type="text" class="border w-1/2 rounded-md [ p-2 ]" placeholder="Daisy" />
-            </div> -->
-            <div class="flex flex-wrap items-start w-full">
-                <div class="justify-start w-1/4">
-                    <div class="skeleton h-8 w-1/2"></div>
-                </div>
-                <div class="flex flex-col grow gap-y-2">
-                    <div class="skeleton h-8 w-full"></div>
-                    <div class="skeleton h-4 w-full"></div>
-                    <div class="skeleton h-4 w-full"></div>
-                    
-                </div>
+                <p class="w-full sm:w-1/4 font-semibold text-sm sm:text-base">Industry*</p>
+                <select (change)="next()" [(ngModel)]="industry" class="border w-3/4 rounded-md text-sm sm:text-base [ p-2 ]" name="" id="industry" [ngClass]="{'input-error': industry === '' && form_touched == true}">
+                    @for (item of industries; track $index) {
+                        <option value="{{item}}">{{item}}</option>
+                    }
+                </select>
+            </div>
+            <div class="flex flex-wrap items-center w-full">
+                <p class="w-full sm:w-1/4 font-semibold text-sm sm:text-base">Role in the Company*</p>
+                <input (change)="next()" [(ngModel)]="role" type="text" class="border grow sm:w-1/2 rounded-md text-sm sm:text-base [ p-2 ]" placeholder="" [ngClass]="{'input-error': role === '' && form_touched == true}"/>
+            </div>
+        </div>
+        <p class="text-2xl font-bold">Tell us about your business</p>
+        <div class="flex flex-wrap justify-between gap-y-4 [ py-8 ]">
+            <div class="flex flex-wrap items-center w-full">
+                <p class="w-full sm:w-1/4 font-semibold text-sm sm:text-base">Company Name*</p>
+                <input (change)="next()" [(ngModel)]="company_name" type="text" class="border grow sm:w-1/2 rounded-md text-sm sm:text-base [ p-2 ]" placeholder="" [ngClass]="{'input-error': company_name === '' && form_touched == true}"/>
             </div>
             <div class="flex flex-wrap items-start w-full">
-                <div class="justify-start w-1/4">
-                    <div class="skeleton h-8 w-1/2"></div>
-                </div>
-                <div class="flex flex-col grow gap-y-2">
-                    <div class="skeleton h-8 w-full"></div>
-                    <div class="skeleton h-4 w-full"></div>
-                    <div class="skeleton h-4 w-full"></div>
-                    
-                </div>
+                <p class="w-full sm:w-1/4 font-semibold text-sm sm:text-base">Brief Background on your business</p>
+                <textarea (change)="next()" [(ngModel)]="background" type="text" rows="6" class="border grow rounded-md text-sm sm:text-base [ p-2 ]" placeholder="We’d love to learn more about your business! How old is your company? What product or service do you offer? Do you have a Mission and Vision statement that you can share with us? This will help us understand your website needs better."></textarea>
+            </div>
+            <div class="flex flex-wrap items-center w-full">
+                <p class="w-full sm:w-1/4 font-semibold text-sm sm:text-base">Social Media Page/s</p>
+                <input (change)="next()" [(ngModel)]="facebook" type="text" class="border grow sm:w-1/2 rounded-md text-sm sm:text-base [ p-2 ]" placeholder="Facebook link" />
+            </div>
+            <div class="flex flex-wrap items-center w-full">
+                <p class="w-full sm:w-1/4 font-semibold text-sm sm:text-base"></p>
+                <input (change)="next()" [(ngModel)]="instagram" type="text" class="border grow sm:w-1/2 rounded-md text-sm sm:text-base [ p-2 ]" placeholder="Instagram Link" />
+            </div>
+            <div class="flex flex-wrap items-center w-full">
+                <p class="w-full sm:w-1/4 font-semibold text-sm sm:text-base"></p>
+                <input (change)="next()" [(ngModel)]="linkedin" type="text" class="border grow sm:w-1/2 rounded-md text-sm sm:text-base [ p-2 ]" placeholder="Linkedin Link" />
+            </div>
+            <div class="flex flex-wrap items-center w-full">
+                <p class="w-full sm:w-1/4 font-semibold text-sm sm:text-base"></p>
+                <input (change)="next()" [(ngModel)]="other_socials" type="text" class="border grow sm:w-1/2 rounded-md text-sm sm:text-base [ p-2 ]" placeholder="Other Social Media Links" />
             </div>
             <div class="flex flex-wrap items-start w-full">
-                <div class="justify-start w-1/4">
-                    <div class="skeleton h-8 w-1/2"></div>
-                </div>
-                <div class="flex flex-col grow gap-y-2">
-                    <div class="skeleton h-8 w-full"></div>
-                    <div class="skeleton h-4 w-full"></div>
-                    <div class="skeleton h-4 w-full"></div>
-                    
-                </div>
+                <p class="w-full sm:w-1/4 font-semibold text-sm sm:text-base">Any additional information</p>
+                <textarea (change)="next()" [(ngModel)]="other_info" type="text" rows="4" class="border grow rounded-md text-sm sm:text-base [ p-2 ]" placeholder="Feel free to share anything you'd like to add prior to our meeting. We can't wait to work with you!"></textarea>
             </div>
-            <!-- <div class="w-full">
-                <label class="flex items-center gap-20">
-                    Company Name
-                    <input type="text" class="border grow rounded-md [ p-2 ]" placeholder="Daisy" />
-                </label>
+        </div>
+        <div class="w-full">
+            <div class="flex flex-wrap justify-start space-x-2 [ py-4 px-2 ]">
+                <button routerLink="/pages/addon/selection" [queryParams]="{step: '3'}" class="bg-gray-300 text-slate-950 rounded-full [ px-6 py-2 ]">Back</button>
+                <button (click)="submit()" class="bg-slate-950 text-white rounded-full [ px-6 py-2 ]">Next</button>
             </div>
-            <div class="w-full">
-                <label class="flex items-center gap-20">
-                    Industry
-                    <input type="text" class="border grow rounded-md [ p-2 ]" placeholder="Daisy" />
-                </label>
-            </div>
-            <div class="w-full">
-                <label class="flex items-center gap-20">
-                    Brief Background on your Business
-                    <input type="text" class="border grow rounded-md [ p-2 ]" placeholder="Daisy" />
-                </label>
-            </div> -->
+
         </div>
         
     </div>
-    <div class="w-4/12">
-        <app-order-summary></app-order-summary>
+    <div class="hidden sm:hidden md:hidden lg:block xl:block lg:w-4/12 xl:w-4/12 min-h-full">
+        <app-order-summary [business_details]="form_details" (check_form)="check_form($event)"></app-order-summary>
     </div>
 </div>

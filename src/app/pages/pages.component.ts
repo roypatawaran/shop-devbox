@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
 import { HeaderComponent } from "../@components/header/header.component";
 import { FooterComponent } from "../@components/footer/footer.component";
 import { RouterOutlet } from '@angular/router';
@@ -10,6 +10,12 @@ import { RouterOutlet } from '@angular/router';
   templateUrl: './pages.component.html',
   styleUrl: './pages.component.scss'
 })
-export class PagesComponent {
-
+export class PagesComponent implements AfterViewInit {
+  ngAfterViewInit(): void {
+    // window.scroll({
+    //   top: 0,
+    //   left: 0,
+    //   behavior: 'smooth'
+    // })
+  }
 }

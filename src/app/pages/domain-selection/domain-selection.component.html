@@ -1,69 +1,88 @@
-<div class="flex flex-wrap min-h-screen">
-    <div class="w-8/12 px-36 py-10">
+<div class="flex flex-wrap">
+    <div class="block md:hidden sm:hidden [ sm:px-12 pt-12 ]">
+        <ul class="steps w-full">
+            <li class="step step-neutral text-xs sm:text-sm">Choose your Template</li>
+            <li class="step step-neutral text-xs sm:text-sm">Find your Domain Name</li>
+            <li class="step text-xs sm:text-sm">Select Add Ons</li>
+            <li class="step text-xs sm:text-sm">Business Information</li>
+            <li class="step text-xs sm:text-sm">Schedule Appointment</li>
+          </ul>
+    </div>
+    <div class="w-full md:w-8/12 sm:w-8/12 px-4 sm:px-20 py-10">
         <p class="text-2xl font-bold">Find your domain name</p>
         <div class="mt-4 max-w-3xl py-2 px-6 bg-gray-50 border flex focus-within:border-gray-300">
-            <input type="text" placeholder="ex: yourbusiness.ph" class="bg-transparent w-full focus:outline-none pr-4 font-semibold border-0 focus:ring-0 px-0 py-0" name="topic"><button class="flex flex-row items-center justify-center min-w-[130px] px-4 rounded-full font-medium tracking-wide border disabled:cursor-not-allowed disabled:opacity-50 transition ease-in-out duration-150 text-base bg-black text-white font-medium tracking-wide border-transparent py-1.5 h-[38px] -mr-3" >
+            <input [(ngModel)]="domain_name" type="text" placeholder="ex: yourbusiness.ph" class="bg-transparent w-full focus:outline-none pr-4 font-semibold border-0 focus:ring-0 px-0 py-0" name="topic"><button (click)="toggleDomain()" class="flex flex-row items-center justify-center min-w-[130px] px-4 rounded-lg border disabled:cursor-not-allowed disabled:opacity-50 transition ease-in-out duration-150 text-base bg-black text-white font-medium tracking-wide border-transparent py-1.5 h-[38px] -mr-3" >
                 Search
             </button>
         </div>
-        <div class="flex flex-wrap items-center [ py-4 ]">
-            <button class="bg-slate-950 text-white text-xs rounded-full [ px-6 py-2 ]">Skip This Step</button>
-            <p class="font-medium [ px-4 ]">I already have a domain, thanks!</p>
+        @if (domain_results[0]?.is_available == false) {
+        <div class="flex flex-wrap items-center [ pt-2 ]">
+            <p class="font-medium text-red-500 text-sm sm:text-base [ px-4 ]">{{ domain_results[0].domain_name }} has already been taken.</p>
         </div>
-        <div class="items-center [ py-4 ]">
+        }
+        <div class="flex flex-wrap items-center [ py-4 ]">
+            <!-- <button class="bg-slate-950 text-white text-xs rounded-lg [ px-6 py-2 ]" routerLink="/pages/addon/selection" [queryParams]="{step: '3'}">Skip This Step</button> -->
+            <button class="bg-slate-950 text-white text-xs rounded-lg [ px-6 py-2 ]" (click)="chooseDomain('N/A')">Skip This Step</button>
+            <p class="font-medium text-xs sm:text-sm [ px-4 ]">I already have a domain, thanks!</p>
+        </div>
+        @if (domain_suggestions?.length > 0) {
+        <!-- <div class="items-center [ py-4 ]">
             <p class="text-xl font-semibold">Top Choices</p>
             <p class="text-sm font-normal [ py-1 ]">Domain include free Privacy Protection. Forever.</p>
-            <div class="flex flex-wrap justify-between [ px-20 py-8 ]">
+            <div class="flex flex-wrap justify-between [ px-5 py-8 ]">
                 <div class="card border border-gray-100 bg-base-100 w-80 shadow-2xl">
-                    <!-- <figure>
-                      <img
-                        src="https://plus.unsplash.com/premium_photo-1681566925324-ee1e65d9d53e?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                        alt="Shoes" />
-                    </figure> -->
+                    
                     <div class="card-body">
                         <img class="w-1/3" src="https://www.svgrepo.com/show/309514/developer-board.svg" alt="">
                         <h2 class="card-title">yourbusiness.co</h2>
                         <p class="text-blue-500 font-bold text-2xl">AUD35.00/year</p>
                         <div class="card-actions justify-end [ pt-4 ]">
-                            <button class="bg-slate-950 text-white text-sm rounded-full [ px-4 py-2 ]" routerLink="/pages/addon/selection" [queryParams]="{step: '3'}">Add to Cart</button>
+                            <button class="bg-slate-950 text-white text-sm rounded-full [ px-4 py-2 ]" routerLink="/pages/addon/selection" [queryParams]="{step: '3'}">Select this Domain</button>
                         </div>
                     </div>
                 </div>
                 <div class="card border border-gray-100 bg-base-100 w-80 shadow-2xl">
-                    <!-- <figure>
-                      <img
-                        src="https://plus.unsplash.com/premium_photo-1681680196936-c49c8a2330b8?q=80&w=3366&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                        alt="Shoes" />
-                    </figure> -->
+                    
                     <div class="card-body">
                         <img class="w-1/3" src="https://www.svgrepo.com/show/309514/developer-board.svg" alt="">
                         <h2 class="card-title">yourbusiness.au</h2>
                         <p class="text-blue-500 font-bold text-2xl">AUD35.00/year</p>
                       <div class="card-actions justify-end [ pt-4 ]">
-                        <button class="bg-slate-950 text-white text-sm rounded-full [ px-4 py-2 ]" routerLink="/pages/addon/selection" [queryParams]="{step: '3'}">Add to Cart</button>
+                        <button class="bg-slate-950 text-white text-sm rounded-full [ px-4 py-2 ]" routerLink="/pages/addon/selection" [queryParams]="{step: '3'}">Select this Domain</button>
                       </div>
                     </div>
                   </div>
             </div>
-        </div>
-        
+        </div> -->
         <div class="items-center [ py-4 ]">
-            <p class="text-xl font-semibold">Other Options</p>
+            <p class="text-xl font-semibold">Top Choices</p>
+            <p class="text-sm font-light [ pb-2 ]">Domains include free Privacy Protection. Forever.</p>
+            @if (domain_results[0].is_available == true) {
+                <div class="flex flex-wrap items-center justify-between border-b-2 [ p-4 ]">
+                    <p class="font-medium text-base sm:text-xl">{{domain_results[0]?.domain_name}}</p>
+                    <!-- <button routerLink="/pages/addon/selection" [queryParams]="{step: '3'}" class="bg-gray-300 rounded-md text-sm [ px-3 py-1.5 ] "><span class="font-semibold">Select this Domain</span> <span class="pl-4 text-blue-500 font-bold">{{ 10 | currency: 'AUD' : 'code'  }}</span> </button> -->
+                    <button (click)="chooseDomain(domain_results[0]?.domain_name)" class="bg-gray-300 rounded-md text-xs [ px-3 py-1.5 ] ">
+                        <span class="font-semibold">Select this Domain</span> 
+                        <span class="pl-4 text-blue-500 font-bold">{{ domain_results[0]?.renew_price | currency: 'AUD' : 'code'  }}</span> 
+                    </button>
+                </div>
+            }
+            @for (item of domain_suggestions; track $index) {
             <div class="flex flex-wrap items-center justify-between border-b-2 [ p-4 ]">
-                <p class="font-medium text-xl">yourbusiness.com</p>
-                <button routerLink="/pages/addon/selection" [queryParams]="{step: '3'}" class="bg-gray-300 rounded-md text-sm [ px-3 py-1.5 ] "><span class="font-semibold">Add to Cart</span> <span class="pl-4 text-blue-500 font-bold">{{ 10 | currency: 'AUD' : 'code'  }}</span> </button>
+                <p class="font-medium text-base sm:text-xl">{{item.domain_name}}</p>
+                <!-- <button routerLink="/pages/addon/selection" [queryParams]="{step: '3'}" class="bg-gray-300 rounded-md text-sm [ px-3 py-1.5 ] "><span class="font-semibold">Select this Domain</span> <span class="pl-4 text-blue-500 font-bold">{{ 10 | currency: 'AUD' : 'code'  }}</span> </button> -->
+                <button (click)="chooseDomain(item.domain_name)" class="bg-gray-300 rounded-md text-xs [ px-3 py-1.5 ] ">
+                    <span class="font-semibold">Select this Domain</span> 
+                    <span class="pl-4 text-blue-500 font-bold">{{ item.renew_price | currency: 'AUD' : 'code'  }}</span> 
+                </button>
             </div>
-            <div class="flex flex-wrap items-center justify-between border-b-2 [ p-4 ]">
-                <p class="font-medium text-xl">yourbusiness.com.au</p>
-                <button routerLink="/pages/addon/selection" [queryParams]="{step: '3'}" class="bg-gray-300 rounded-md text-sm [ px-3 py-1.5 ] "><span class="font-semibold">Add to Cart</span> <span class="pl-4 text-blue-500 font-bold">{{ 10 | currency: 'AUD' : 'code'  }}</span> </button>
-            </div>
-            <div class="flex flex-wrap items-center justify-between border-b-2 [ p-4 ]">
-                <p class="font-medium text-xl">yourbusiness.net</p>
-                <button routerLink="/pages/addon/selection" [queryParams]="{step: '3'}" class="bg-gray-300 rounded-md text-sm [ px-3 py-1.5 ] "><span class="font-semibold">Add to Cart</span> <span class="pl-4 text-blue-500 font-bold">{{ 10 | currency: 'AUD' : 'code'  }}</span> </button>
-            </div>
+            }
+            
         </div>
-        </div>
-    <div class="w-4/12">
+    }
+    </div>
+    <div class="hidden md:block sm:block w-4/12 min-h-full">
         <app-order-summary></app-order-summary>
     </div>
+    
 </div>

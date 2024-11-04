@@ -9,6 +9,7 @@ import { BusinessInformationComponent } from './business-information/business-in
 import { QuotationPageComponent } from './quotation-page/quotation-page.component';
 import { AppointmentSelectionComponent } from './appointment-selection/appointment-selection.component';
 import { AppointmentSuccessComponent } from './appointment-success/appointment-success.component';
+import { DomainSearchComponent } from './domain-search/domain-search.component';
 
 const routes: Routes = [
   {
@@ -23,6 +24,7 @@ const routes: Routes = [
     path: 'domain',
     component: PagesComponent,
     children: [
+      { path: 'search', component: DomainSearchComponent },
       { path: 'selection', component: DomainSelectionComponent },
       // { path: 'view/:id', component: ViewTemplateComponent }
     ]
@@ -42,7 +44,7 @@ const routes: Routes = [
       { path: 'business', component: BusinessInformationComponent },
       { path: 'quotation', component: QuotationPageComponent },
       { path: 'appointment', component: AppointmentSelectionComponent },
-      { path: 'success', component: AppointmentSuccessComponent },
+      { path: 'success', component: QuotationPageComponent },
       // { path: 'view/:id', component: ViewTemplateComponent }
     ]
   },

@@ -4,6 +4,7 @@
     "/pages/addon",
     "/pages/addon/selection",
     "/pages/domain",
+    "/pages/domain/search",
     "/pages/domain/selection",
     "/pages/info",
     "/pages/info/appointment",

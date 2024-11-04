@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { Subject, takeUntil } from 'rxjs';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { TemplateService } from '../../../@core/services/template.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-view-template',
@@ -8,15 +11,77 @@ import { RouterLink } from '@angular/router';
   templateUrl: './view-template.component.html',
   styleUrl: './view-template.component.scss'
 })
-export class ViewTemplateComponent implements OnInit {
+export class ViewTemplateComponent implements OnInit, AfterViewInit {
+  private unsubscribe$ = new Subject<void>();
+
   templates: any = [];
+  template_id: any;
+  selected_template: any;
+  other_templates: any;
+
+  constructor(private route: ActivatedRoute, 
+              private templateService: TemplateService,
+              private _spinner: NgxSpinnerService,
+              private router: Router
+            ) {}
 
   ngOnInit(): void {
-    this.templates = [
-      { template_id: '4', template_name: 'Visard', details: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Explicabo sequi facere consequatur, provident vel, libero quas saepe ea repudiandae beatae odit voluptas atque reprehenderit accusantium necessitatibus et distinctio blanditiis vero.', img_url: 'https://elements-cover-images-0.imgix.net/0edb19ee-2fc5-44dd-b809-67d680548d70?auto=compress%2Cformat&w=710&fit=max&s=86bbe2be6a38e06a6263dba8c85d61d1' },
-      { template_id: '5', template_name: 'Translo', details: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Explicabo sequi facere consequatur, provident vel, libero quas saepe ea repudiandae beatae odit voluptas atque reprehenderit accusantium necessitatibus et distinctio blanditiis vero.', img_url: 'https://elements-cover-images-0.imgix.net/25fe7338-19c2-431e-a588-f4c236af8736?auto=compress%2Cformat&w=710&fit=max&s=7c1ca6b31151c125fabed992aba78c10' },
-      { template_id: '6', template_name: 'Real Estate', details: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Explicabo sequi facere consequatur, provident vel, libero quas saepe ea repudiandae beatae odit voluptas atque reprehenderit accusantium necessitatibus et distinctio blanditiis vero.', img_url: 'https://elements-cover-images-0.imgix.net/673c169d-db2d-44a9-bb9e-f0ede60c8027?auto=compress%2Cformat&w=710&fit=max&s=b980632a5a8cb0aef86ec94d312545b5' }
+    this._spinner.show();
+    this.getParams();
+  }
 
-    ]
+  ngAfterViewInit(): void {
+    // window.scroll({
+    //   top: 0,
+    //   left: 0,
+    //   behavior: 'smooth'
+    // })
+  }
+
+  getTemplates() {
+    this.templateService.getAll()
+		.pipe(takeUntil(this.unsubscribe$))
+		.subscribe({
+			next: (res) => {
+        this.templates = res;
+        // console.log(this.templates);
+			},
+			error: (err: any) => {
+        console.error(err);
+      },
+			complete: () => {
+        this.getTemplateDetails(this.template_id);
+        setTimeout(() => {
+          this._spinner.hide();
+        }, 500);
+      }
+		})
+  }
+  
+
+  getParams() {
+    this.route.paramMap
+    .subscribe((params: any) => {
+      this.template_id = params.get('id');
+      this.getTemplates();
+    })
+  }
+
+  getTemplateDetails(id: any) {
+    this.selected_template = this.templates.find((element: any) => {
+      return element._id == this.template_id;
+    })
+
+    this.other_templates = this.templates.filter((element: any) => {
+      return element._id != this.template_id
+    })
+    // console.log(this.other_templates)
+    // console.log(this.selected_template)
+    
+  }
+
+  selectTemplate(){
+    localStorage.setItem('template', JSON.stringify(this.selected_template));
+    this.router.navigate(['/pages/domain/search'])
   }
 }

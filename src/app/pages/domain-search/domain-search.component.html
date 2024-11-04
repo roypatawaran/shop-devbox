@@ -1,0 +1,32 @@
+<video playsinline autoplay muted loop poster>
+    <source src="../../assets/soft-gradient-abstract-animated-background-2024-01-28-02-34-38-utc.webm" type="video/webm">
+</video>
+<div class="h-screen">
+    <div class="block [ sm:px-12 pt-12 ]">
+        <ul class="steps w-full">
+            <li class="step step-neutral text-xs sm:text-sm">Choose your Template</li>
+            <li class="step step-neutral text-xs sm:text-sm">Find your Domain Name</li>
+            <li class="step text-xs sm:text-sm">Select Add Ons</li>
+            <li class="step text-xs sm:text-sm">Business Information</li>
+            <li class="step text-xs sm:text-sm">Schedule Appointment</li>
+          </ul>
+    </div>
+    <div class="w-full px-4 sm:px-8 md:px-12 lg:px-36 xl:px-36 py-20">
+        <p class="text-2xl font-bold">Find your domain name</p>
+        <div  [ngClass]="{'border-red-500': (domain_name == undefined || domain_name == '') && form_touched == true}" class="mt-4 w-full py-2 px-6 bg-gray-50 border flex">
+            <input [(ngModel)]="domain_name" type="text" placeholder="ex: yourbusiness.ph" class="bg-transparent w-full focus:outline-none pr-4 font-semibold border-0 focus:ring-0 px-0 py-0" name="topic"><button (click)="toggleDomain()" class="flex flex-row items-center justify-center min-w-[130px] px-4 rounded-lg border disabled:cursor-not-allowed disabled:opacity-50 transition ease-in-out duration-150 text-base bg-black text-white font-medium tracking-wide border-transparent py-1.5 h-[38px] -mr-3" >
+                Search
+            </button>
+        </div>
+        @if ((domain_name == undefined || domain_name == '') && form_touched) {
+            <div class="flex flex-wrap items-center [ pt-2 ]">
+                <p class="font-medium text-red-500 text-sm sm:text-base [ px-4 ]">Please enter something here.</p>
+            </div>
+            }
+        <div class="flex flex-wrap items-center [ py-4 ]">
+            <!-- <button class="bg-slate-950 text-white text-xs rounded-lg [ px-6 py-2 ]" routerLink="/pages/addon/selection" [queryParams]="{step: '3'}">Skip This Step</button> -->
+            <button class="bg-slate-950 text-white text-xs rounded-lg [ px-6 py-2 ]" (click)="chooseDomain('N/A')">Skip This Step</button>
+            <p class="text-xs sm:text-sm [ pl-4 sm:px-4 ]">I already have a domain, thanks!</p>
+        </div>
+    </div>
+</div>

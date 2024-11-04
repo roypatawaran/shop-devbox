@@ -1,30 +1,88 @@
-<div class="flex flex-wrap min-h-screen">
-    <div class="flex w-full justify-center [ py-8 px-40 ]">
-        <ul class="steps">
-            <li class="step step-neutral [ px-20 ]">Choose a Template</li>
+<div class="flex flex-wrap">
+    <div class="w-full [ py-8 px-2 sm:px-6 md:px-6 lg:pl-20 xl:pl-20 ]">
+        <ul class="steps w-full">
+            <li class="step step-neutral text-xs sm:text-sm">Choose Template</li>
+            <li class="step step-neutral text-xs sm:text-sm">Find your Domain Name</li>
+            <li class="step step-neutral text-xs sm:text-sm">Select Add Ons</li>
+            <li class="step step-neutral text-xs sm:text-sm">Business Information</li>
+            <li class="step step-neutral text-xs sm:text-sm">Schedule Appointment</li>
+            <!-- <li class="step step-neutral">Choose a Template</li>
             <li class="step step-neutral">Find your Domain Name</li>
             <li class="step step-neutral">Select Add Ons</li>
             <li class="step step-neutral">Business Information</li>
-            <li class="step step-neutral">Get a Quotation</li>
-            <li class="step step-neutral">Send an Appointment</li>
+            <li class="step step-neutral">Select Appointment</li> -->
           </ul>
     </div>
-    <div class="w-6/12 pl-36 pr-16 py-10">
-        <img src="https://images.unsplash.com/photo-1511376979163-f804dff7ad7b?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="">
+    <div class="w-full [ pb-10 ]">
+        <p class="text-2xl font-bold [ px-6 sm:px-6 md:px-6 lg:pl-20 xl:pl-20 ]">We'd love to discuss more details with you</p>
     </div>
-    <div class="w-6/12 py-10">
-        <p class="text-2xl font-bold [ pb-10 ]">We'd love to discuss more details with you</p>
-        <p class="text-lg font-bold">1. Select an available date</p>
-        <div class="flex flex-wrap justify-between gap-y-12 [ py-8 pb-10 ]">
-            <input class="border w-1/2 rounded-sm p-2" type="date" id="birthday" name="birthday">
-        </div>
-        <p class="text-lg font-bold">2. Additional Notes</p>
-        <div class="flex flex-wrap justify-between gap-y-12 [ py-8 pr-40 ]">
-            <textarea class="border w-1/2 grow rounded-sm p-2" type="date" rows="10"></textarea>
-        </div>
-        <div class="flex justify-end [ pt-10 px-40 ]">
-            <button class=" bg-slate-950 text-white rounded-full px-5 py-2">Book Appointment</button>
+    <div class="w-full sm:w-full md:w-full lg:w-6/12 xl:w-6/12 [ px-6 sm:px-6 md:px-6 lg:pl-20 xl:pl-20 pb-10 ]">
+        <p class="text-xl font-bold">1. Select an available date</p>
+        <div class="flex flex-wrap justify-between [ py-8 pb-10 ]">
+            <input [(ngModel)]="appointment_date" class="border border-gray-300 input w-full rounded-sm p-2" type="date" id="birthday" name="birthday" [ngClass]="{'input-error': form_status === false && form_touched == true}">
+            @if(form_status === false && form_touched == true) {
+            <p class="text-red-500 font-light">*Please select a date in the future.</p>
+            }
         </div>
         
+        <p class="text-xl font-bold">2. Additional Notes</p>
+        <div class="flex flex-wrap justify-between gap-y-12 [ py-8 ]">
+            <textarea [(ngModel)]="notes" class="border w-full rounded-sm p-2" type="text" rows="6"></textarea>
+        </div>
+        
+    </div>
+    <div class="w-full sm:w-full md:w-full lg:w-6/12 xl:w-6/12 [ px-6 sm:px-6 md:px-6 lg:pr-20 xl:pr-20 ]">
+        <!-- <img src="https://images.unsplash.com/photo-1511376979163-f804dff7ad7b?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt=""> -->
+        <p class="text-xl font-bold">Some Reminders</p>
+        <div class="flex flex-wrap justify-start gap-y-1 [ pt-4 ]">
+            <div class="pb-3">
+                <p class="font-bold [ py-2 ]">Check your e-mail for the confirmation and meeting link.</p>
+                <p class="text-sm text-slate-500">After booking a call, you will receive an e-mail confirmation with the meeting schedule, link, and additional reminders.</p>
+            </div>
+            <div class="pb-3">
+                <p class="font-bold [ py-2 ]">Think about the kind of content you want to put into your website.</p>
+                <p class="text-sm text-slate-500">Your website content is a mix of written copy, images, and video elements. Prior to the call, start thinking about what you'd like us to include on your website, as well as what information you want to highlight on your landing page.</p>
+            </div>
+            <!-- <div class="pb-3">
+                <p class="font-bold [ py-2 ]">Have your brand book and other marketing materials ready.</p>
+                <p class="text-sm text-slate-500">Any document or link that reflects your brand identity will help us create a layout that's aligned with your existing marketing materials. Please prepare these to share during the call.</p>
+            </div> -->
+            <div class="pb-3">
+                <p class="font-bold [ py-2 ]">Want to speak with us before our call?</p>
+                <p class="text-sm text-slate-500">Feel free to get in touch with product.team&#64;devboxph.com if you have any questions! </p>
+            </div>
+            <!-- <div class="collapse bg-base-200">
+                <input type="radio" name="my-accordion-1" checked="checked" />
+                <div class="collapse-title text-lg font-semibold">Check your email for the confirmation and meeting link</div>
+                <div class="collapse-content">
+                  <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ad maiores totam repellat dignissimos voluptatem, expedita dolores distinctio sunt cum laboriosam nulla iure architecto amet dolorum aliquid doloribus ipsam delectus enim!</p>
+                </div>
+            </div>
+            <div class="collapse bg-base-200">
+                <input type="radio" name="my-accordion-1" />
+                <div class="collapse-title text-lg font-semibold">Think about the kind of content you want to put into your website</div>
+                <div class="collapse-content">
+                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt repellat ducimus sit velit nostrum in possimus adipisci libero error similique earum, eveniet expedita, voluptate labore culpa placeat! Aliquam, voluptatem. Dignissimos!</p>
+                </div>
+            </div>
+            <div class="collapse bg-base-200">
+                <input type="radio" name="my-accordion-1" />
+                <div class="collapse-title text-lg font-semibold">Have your brand book and other marketing materials ready</div>
+                <div class="collapse-content">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam cumque aperiam in, est numquam quidem optio delectus hic blanditiis magni? Quibusdam neque nisi ex omnis soluta aspernatur earum laboriosam aperiam!</p>
+                </div>
+            </div>
+            <div class="collapse bg-base-200">
+                <input type="radio" name="my-accordion-1" />
+                <div class="collapse-title text-lg font-semibold">Want to speak to us before our call?</div>
+                <div class="collapse-content">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam cumque aperiam in, est numquam quidem optio delectus hic blanditiis magni? Quibusdam neque nisi ex omnis soluta aspernatur earum laboriosam aperiam!</p>
+                </div>
+            </div> -->
+            <div class="w-full flex [ py-10 ]">
+                <button class="grow bg-slate-950 text-white rounded-full px-16 py-2" (click)="confirmAppointment()">Confirm Website Appointment</button>
+                <!-- <button *ngIf="step == 4" routerLink="/pages/info/quotation" [queryParams]="{step: '5'}" class="w-full bg-slate-950 text-white [ p-2 ]">NEXT</button> -->
+            </div>
+        </div>
     </div>
 </div>
